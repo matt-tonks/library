@@ -12,5 +12,11 @@ trait BelongsToTenant
 
 		// Apply the tenant scope
 		static::addGlobalScope(new TenantScope());
+
+		// When creating model, add tenant id from session
+
+		static::creating(function ($model) {
+			$model->tenant_id = session('tenant_id');
+		});
 	}
 }
